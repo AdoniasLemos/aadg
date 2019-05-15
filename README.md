@@ -12,4 +12,4 @@ Prof° Edson
 ## Contribuidores
 - Adonias Lemos
 - Alessandra Santos
-- Késia Brasil
+- Kézia Brasil
