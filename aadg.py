@@ -1,7 +1,5 @@
 import cv2
 import numpy as np
-# import matplotlib.pyplot as plt
-# import matplotlib.image as mpimg
 
 def show_image():
 
@@ -30,3 +28,11 @@ def show_image():
         cv2.waitKey(1)
 
 show_image()
+
+
+
+
+def getImage(url, format):
+    image = cv2.imread(url)
+    return cv2.cvtColor(image, format)
+    
