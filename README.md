@@ -6,6 +6,8 @@ Api para auxiliar no diagnóstico de glaucoma utilizando exames de fundo de olho
 - opencv
 - numpy
 
+    pip install -r requirements.txt
+
 ## Orientação
 Prof° Edson
 
