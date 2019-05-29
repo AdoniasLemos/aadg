@@ -3,6 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 # import matplotlib.image as mpimg
 
+
 def show_image():
 
     while True:
@@ -12,13 +13,14 @@ def show_image():
 
         # transformando as imagens carregadas para a escala de cinza
         img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        img_not_glaucoma_gray = cv2.cvtColor(img_not_glaucoma, cv2.COLOR_BGR2GRAY)
+        img_not_glaucoma_gray = cv2.cvtColor(
+            img_not_glaucoma, cv2.COLOR_BGR2GRAY)
 
         # limiarizando a imagem
-        ret, thresh1 = cv2.threshold(img_gray, 205, 255
-                                     , cv2.ADAPTIVE_THRESH_MEAN_C)
-        ret, thresh2 = cv2.threshold(img_not_glaucoma_gray, 205, 255
-                                     , cv2.ADAPTIVE_THRESH_MEAN_C)
+        ret, thresh1 = cv2.threshold(
+            img_gray, 205, 255, cv2.ADAPTIVE_THRESH_MEAN_C)
+        ret, thresh2 = cv2.threshold(
+            img_not_glaucoma_gray, 205, 255, cv2.ADAPTIVE_THRESH_MEAN_C)
 
         # histograma
         hist = cv2.calcHist([thresh1], [0], None, [180], [0, 180])
@@ -34,16 +36,12 @@ def show_image():
         cv2.imshow('Sem Glaucoma (Segmentado)', thresh2)
         cv2.imshow('Sem Glaucoma', img_not_glaucoma)
 
-
-
         cv2.waitKey(1)
 
+
 show_image()
-
-
 
 
 def getImage(url, format):
     image = cv2.imread(url)
     return cv2.cvtColor(image, format)
-    

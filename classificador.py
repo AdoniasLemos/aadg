@@ -1,11 +1,10 @@
 import cv2
-import numpy as np
-# import matplotlib.pyplot as plt
+from utilites import getImagesOfFolder, getImageConverted
+from matplotlib import pyplot as plt
 
 colors = {"b": 0, "w": 1}
 
-
-def get_frenq_branco(image):
+def getFrenqBranco(image):
     freq_branco = 0
     for color in colors:
         histograma = cv2.calcHist([image], [colors[color]], None, [256], [0, 256])
@@ -14,6 +13,13 @@ def get_frenq_branco(image):
             freq_branco += histograma[i]
 
             print(freq_branco)
-"""for hist in histograma:
-dom = (np.max(histograma))
-histograma[255]"""
+
+def diagnosticsAll(images):
+    for image in images:
+        img = getImageConverted(image, cv2.COLOR_RGB2GRAY)
+
+        ret, img_limiarizada = cv2.threshold(img,190, 255,cv2.THRESH_BINARY)
+        cv2.imwrite("imageresult.png", img_limiarizada)
+
+
+diagnosticsAll(getImagesOfFolder('./'))
