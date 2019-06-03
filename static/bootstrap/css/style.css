@@ -1,0 +1,33 @@
+body{
+    margin: 0;    
+    padding: 0;
+    width: 100%;
+    height:2000;
+}
+
+
+#top{
+    height: 60px;
+    background-color: #1E90FF;
+    padding-bottom:10px; 
+    
+}
+#center{
+
+        height:1000px;
+        background-color: #FFF;
+        margin-top: 10%;
+    
+}
+#imageup{
+    margin-top: 100px;
+}
+/*
+#up{
+    border: 1px;
+    width: 100%;
+}*/
+.custom-file{
+
+    display: inline;
+}

@@ -1,0 +1,98 @@
+{% extends "bootstrap/base.html" %}
+
+
+<!DOCTYPE html>
+<html>
+    
+        
+    <head>
+        {% block head %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <title>SDG</title>
+        {% block styles %}
+        
+        <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="static/bootstrap/css/style.css">
+      
+        <style type="text/css">
+            .vertical-align {
+            display: flex;
+            align-items: center;
+            }
+            
+            </style>
+        {% endblock %}
+
+        {% endblock %}
+        </head>
+       
+    
+    <body>
+        {%block content%}
+            <div class="container-fluid">
+                <div class="row">
+                    <div id="top" class="col-12">
+                            <div id="top" class="col-12">
+                                    <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #1E90FF">
+                                         <a class="navbar-brand" href="#">
+                                             <img class="img-fluid" src ="static/img/logo2.png"alt="">
+                                         </a>    
+                            </div>
+
+                     </div>
+                    </div>    
+                <div class="row">
+                        <div id="center" class="col-12">
+                            <div class="text-center">
+                                <img class="fluid" src="static/img/upload.png">
+                                <h3> Selecione a imagem em voce deseja realizar o diagnóstico</h3>
+                            </div>
+                            <div class="container">
+                            <form action="/uppload"enctype=multipart/form-data method="POST">
+                                    <label for="conteudo">Enviar imagem:</label>
+                                    <input type="file" name="photo" id = "img" accept="image/*" class="form-control" value="<?=$dt->img?>" onchange="PreverIMG();">
+                                    <br>
+                                    <div class="jumbotron">
+                                            <br>
+                                            <img src="" class="img-fluid" 
+                                            style="height: 200px;" id="UploadPreVer">
+                                        </div>
+                                <div>
+
+                                <button type="submit" class="btn btn-info">Enviar imagem</button>
+                                </div>  
+
+                                            <script type="text/javascript">
+ 
+                                                function PreverIMG() {
+                                             
+                                                    var oFReader = new FileReader();
+                                                    oFReader.readAsDataURL(document.getElementById("img").files[0]);
+                                             
+                                                    oFReader.onload = function (oFREvent) {
+                                             
+                                                        document.getElementById("UploadPreVer").src = oFREvent.target.result;
+                                             
+                                                    };
+                                                };
+                                             
+                                            </script>
+                                                         
+                                                              
+                            </form>
+                            <div></div>
+                        </div>
+                </div>
+                <div class="row">
+
+                </div>
+            </div>
+        {%endblock%}
+       
+           
+
+    </body>
+</html>
+
