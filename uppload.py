@@ -9,7 +9,7 @@ import tensorflow as tf
 
 
 global model
-model = load_model('f2.h5')
+model = load_model('f1.h5')
 
 global graph
 graph = tf.get_default_graph()
@@ -61,7 +61,10 @@ def prediction(photo):
 
 def run(photo):
     Class = prediction(photo)
-    print (Class)
+    if (Class == 0):
+        print("você esta sendo diagnosticado com Glaucoma")
+    else:
+        print('voce nao tem Glaucoma')
 
 
 app = Flask(__name__)
