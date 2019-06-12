@@ -4,11 +4,17 @@ from flask_bootstrap import Bootstrap
 import cv2
 from keras.models import load_model
 import numpy as np
+import tensorflow as tf
 
-model = load_model('f1.h5')
+
+
+global model
+model = load_model('f2.h5')
+
+global graph
+graph = tf.get_default_graph()
 
 def autoroi(img):
-
     gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     thresh = cv2.threshold(gray_img, 130, 255, cv2.THRESH_BINARY)[1]
@@ -26,24 +32,36 @@ def autoroi(img):
 
 
 def prediction(photo):
-
     img = cv2.imread(photo)
+    print("======================")
+    print("===========PASSEI===========")
+    print("======================")
     img = autoroi(img)
+
+    print("======================")
+    print("===========PASSEI DE NOVO===========")
+    print("======================")
     img = cv2.resize(img, (256, 256))
     img = np.reshape(img, [1, 256, 256, 3])
-
-    prob = model.predict(img)
+    print("======================")
+    print("===========PASSEI DE NOVO 2===========")
+    print("======================")
+    with graph.as_default():
+        prob = model.predict(img)
+    print("======================")
+    print("===========PASSEI DE NOVO 3===========")
+    print("======================")
     Class = prob.argmax(axis=-1)
+    print("======================")
+    print("===========PASSEI DE NOVO 4===========")
+    print("======================")
 
     return(Class)
 
 
 def run(photo):
     Class = prediction(photo)
-    # if (Class == 0):
-    #     messagebox.showinfo('Prediction', 'You have been diagnosed with Glaucoma')
-    # else:
-    #     messagebox.showinfo('Prediction', 'Congratulations! You are Healthy')
+    print (Class)
 
 
 app = Flask(__name__)
@@ -57,10 +75,13 @@ def handleFileUpload():
     if 'photo' in request.files:
         photo = request.files['photo']
         if photo.filename != '':
-            photo.save(os.path.join('static/result', photo.filename))
+            photo.save(os.path.join(app.root_path + '/static/result', photo.filename))
+            run(os.path.join(app.root_path + '/static/result', photo.filename))
     return redirect(url_for('fileFrontPage'))
 
 if __name__ == '__main__':
-    
-    app.debug = True
+    # BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    print(app.root_path + '/static/result')
+    # print(os.path.join(BASE_DIR + 'static/result'))
+    # app.debug = True
     app.run()     
